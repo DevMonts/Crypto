@@ -1,6 +1,9 @@
+import 'package:crypto/common/constants/app_colors.dart';
+import 'package:crypto/features/favs_coins/logic/provider/favs_coins_provider.dart';
 import 'package:crypto/features/home/data/repositories/coin_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
@@ -29,8 +32,29 @@ class _HomePageState extends State<HomePage> {
                 coinsList[coin].price, //.toString()
               ),
             ),
-            //trailing: Icon(Icons.arrow_right),
-            //onTap: () {},
+            trailing: Consumer<FavsCoinProvider>(
+              builder: (_, favsCoinProvider, __) {
+                final isFav = favsCoinProvider.isFav(coinsList[coin]);
+                return IconButton(
+                  onPressed: () {
+                    final favsCoinProvider = Provider.of<FavsCoinProvider>(
+                      context,
+                      listen: false,
+                    );
+                    isFav
+                        ? favsCoinProvider.removeCoinsFromFav([coinsList[coin]])
+                        : favsCoinProvider.addCoinsToFav([coinsList[coin]]);
+                    debugPrint(
+                      favsCoinProvider.favsCoinsList.toString(),
+                    );
+                  },
+                  icon: Icon(
+                    isFav ? Icons.favorite : Icons.heart_broken,
+                    color: isFav ? AppColors.red : AppColors.redIfOpacity,
+                  ),
+                );
+              },
+            ),
           );
         },
         separatorBuilder: (_, __) => const Divider(),

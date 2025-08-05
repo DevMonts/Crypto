@@ -9,4 +9,8 @@ class Coin {
     required this.id,
     required this.price,
   });
+  @override
+  String toString() {
+    return name;
+  }
 }
