@@ -1,5 +1,5 @@
-import 'package:crypto/features/favs_coins/presentation/lists/favs_coins_list_view.dart';
-import 'package:crypto/features/favs_coins/presentation/lists/other_coins_list_view.dart';
+import 'package:crypto/features/coins/presentation/lists/favs_coins_list_view.dart';
+import 'package:crypto/features/coins/presentation/lists/other_coins_list_view.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {

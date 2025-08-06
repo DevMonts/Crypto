@@ -1,4 +1,4 @@
-import 'package:crypto/features/home/data/models/coin_model.dart';
+import 'package:crypto/features/coins/data/models/coin_model.dart';
 
 class CoinRepository {
   static List<Coin> coinsArray = [

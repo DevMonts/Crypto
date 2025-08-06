@@ -1,5 +1,5 @@
-import 'package:crypto/features/home/data/models/coin_model.dart';
-import 'package:crypto/features/home/data/repositories/coin_repository.dart';
+import 'package:crypto/features/coins/data/models/coin_model.dart';
+import 'package:crypto/features/coins/data/repositories/coin_repository.dart';
 import 'package:flutter/material.dart';
 
 class FavsCoinProvider extends ChangeNotifier {

@@ -1,5 +1,5 @@
 import 'package:crypto/common/constants/app_theme.dart';
-import 'package:crypto/features/home/presentation/pages/home_page.dart';
+import 'package:crypto/features/coins/presentation/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {

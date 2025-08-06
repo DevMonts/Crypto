@@ -1,34 +1,33 @@
 import 'package:crypto/common/constants/app_colors.dart';
-import 'package:crypto/features/favs_coins/logic/provider/favs_coins_provider.dart';
+import 'package:crypto/features/coins/logic/provider/favs_coins_provider.dart';
+import 'package:crypto/features/coins/presentation/widget/coin_details_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-class FavsCoinsListView extends StatefulWidget {
-  const FavsCoinsListView({super.key});
+class OtherCoinsListView extends StatefulWidget {
+  const OtherCoinsListView({super.key});
 
   @override
-  State<FavsCoinsListView> createState() => _FavsCoinsListViewState();
+  State<OtherCoinsListView> createState() => _OtherCoinsListViewState();
 }
 
-class _FavsCoinsListViewState extends State<FavsCoinsListView> {
+class _OtherCoinsListViewState extends State<OtherCoinsListView> {
   @override
   Widget build(BuildContext context) {
-    final favsCoinsList = Provider.of<FavsCoinProvider>(context).favsCoinsList;
     NumberFormat real = NumberFormat.currency(locale: 'pt_BR', name: 'R\$');
+    final otherCoinsList = Provider.of<FavsCoinProvider>(
+      context,
+    ).otherCoinsList;
     return ListView.builder(
       itemBuilder: (BuildContext context, int coin) {
         return ListTile(
-          leading: Image.asset(favsCoinsList[coin].icon),
-          title: Text(favsCoinsList[coin].name),
-          subtitle: Text(
-            real.format(
-              favsCoinsList[coin].price,
-            ),
-          ),
+          leading: Image.asset(otherCoinsList[coin].icon),
+          title: Text(otherCoinsList[coin].name),
+          subtitle: Text(real.format(otherCoinsList[coin].price)),
           trailing: Consumer<FavsCoinProvider>(
             builder: (_, favsCoinProvider, __) {
-              final isFav = favsCoinProvider.isFav(favsCoinsList[coin]);
+              final isFav = favsCoinProvider.isFav(otherCoinsList[coin]);
               return IconButton(
                 onPressed: () {
                   final favsCoinProvider = Provider.of<FavsCoinProvider>(
@@ -37,9 +36,9 @@ class _FavsCoinsListViewState extends State<FavsCoinsListView> {
                   );
                   isFav
                       ? favsCoinProvider.removeCoinsFromFav([
-                          favsCoinsList[coin],
+                          otherCoinsList[coin],
                         ])
-                      : favsCoinProvider.addCoinsToFav([favsCoinsList[coin]]);
+                      : favsCoinProvider.addCoinsToFav([otherCoinsList[coin]]);
                 },
                 icon: Icon(
                   isFav ? Icons.favorite : Icons.heart_broken,
@@ -48,9 +47,17 @@ class _FavsCoinsListViewState extends State<FavsCoinsListView> {
               );
             },
           ),
+          onTap: () {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return CoinDetailsDialog(coin: otherCoinsList[coin]);
+              },
+            );
+          },
         );
       },
-      itemCount: favsCoinsList.length,
+      itemCount: otherCoinsList.length,
       shrinkWrap: true,
     );
   }
