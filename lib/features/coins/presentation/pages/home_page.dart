@@ -18,10 +18,10 @@ class _HomePageState extends State<HomePage> {
     //   context,
     // ).otherCoinsList;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+      //   title: Text(widget.title),
+      // ),
       body: Column(
         children: [
           Container(alignment: Alignment.topCenter, child: FavsCoinsListView()),
