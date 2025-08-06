@@ -13,4 +13,16 @@ class Coin {
   String toString() {
     return name;
   }
+
+  factory Coin.fromJson(Map<String, dynamic> json) {
+    return Coin(
+      icon: json['icon'],
+      name: json['name'],
+      id: json['id'],
+      price: json['price'],
+    );
+  }
+  Map<String, dynamic> toJson() {
+    return {'icon': icon, 'name': name, 'id': id, 'price': price};
+  }
 }
